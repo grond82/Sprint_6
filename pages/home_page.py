@@ -7,11 +7,7 @@ from locators.home_page_locators import HomePageLocators
 from pages.base_page import BasePage
 
 
-class Home_Page(BasePage):
-
-    @allure.step('Прокрутка до вопросов')
-    def scroll_down(self):
-        self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+class HomePage(BasePage):
 
     @allure.step('Клик на вопрос')
     def click_to_question(self, num):

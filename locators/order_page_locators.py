@@ -17,3 +17,4 @@ class OrderPageLocators:
     BUTTON_ZAKAZAT = By.XPATH, "//div[contains(@class, 'Order_Buttons')]//button[contains(text(), 'Заказать')]"
     BUTTON_CONFIRM = By.XPATH, "//button[contains(text(), 'Да')]"
     CONFIRM_ORDER = By.XPATH, "//div[contains(@class, 'Order_ModalHeader')]"
+    PART_PATH = "//div[contains(text(), '"

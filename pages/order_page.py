@@ -31,13 +31,9 @@ class Order(BasePage):
     def click_input_metro_station(self):
         self.click_to_element(OrderPageLocators.FIELD_METRO_STATION)
 
-    def stations_format(self, station):
-        station_path = f'//div[contains(text(), \'{station}\')]'
-        return station_path
-
     @allure.step('Ввод станции метро')
     def input_metro_station(self, station):
-        station_path = self.stations_format(station)
+        station_path = self.format_path(OrderPageLocators.PART_PATH, station)
         path = [By.XPATH, station_path]
         self.click_to_element(OrderPageLocators.FIELD_METRO_STATION)
         self.click_to_element(path)
@@ -49,12 +45,12 @@ class Order(BasePage):
     @allure.step('Ввод даты')
     def input_date(self, date):
         self.enter_text_to_element(OrderPageLocators.FIELD_DATE, date)
-        self.driver.find_element(*OrderPageLocators.FIELD_DATE).send_keys(Keys.ENTER)
+        self.input_enter(OrderPageLocators.FIELD_DATE)
 
     @allure.step('Ввод периода аренды')
     def input_rent_period(self, period):
         self.click_to_element(OrderPageLocators.FIELD_RENT_PERIOD)
-        period_path = f'//div[contains(text(), \'{period}\')]'
+        period_path = self.format_path(OrderPageLocators.PART_PATH, period)
         path = [By.XPATH, period_path]
         self.click_to_element(path)
 
@@ -74,6 +70,11 @@ class Order(BasePage):
     @allure.step('Подтвержение аренды')
     def confirm_order(self):
         self.click_to_element(OrderPageLocators.BUTTON_CONFIRM)
+
+    @allure.step('Проверка заказа')
+    def check_order(self):
+        text = self.get_text_from_element(OrderPageLocators.CONFIRM_ORDER)
+        return text
 
     @allure.step('Полный шаг - создать заказ')
     def set_order(self, order_data):

@@ -23,4 +23,4 @@ class TestOrder:
         order_page.click_cookie_button()
         order_page.click_to_element(locator)
         order_page.set_order(order_data)
-        assert "Заказ оформлен" in driver_firefox.find_element(*OrderPageLocators.CONFIRM_ORDER).text
+        assert "Заказ оформлен" in order_page.check_order()

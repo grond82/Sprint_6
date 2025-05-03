@@ -13,11 +13,11 @@ class TestRedirect():
         driver_firefox.get(TestUrl.ORDERPAGE_URL)
         redirect_page = Redirect(driver_firefox)
         redirect_page.click_logo_samokat()
-        assert "на пару дней" in driver_firefox.find_element(*RedirectPageLocators.LOCATOR_FOR_TEST_REDIRECT_LOGO_SAMOKAT).text
+        assert "на пару дней" in redirect_page.check_redirect_logo_samokat()
 
     @allure.title('Тест на редирект - лого Яндекс')
     def test_redirect_logo_yandex(self, driver_firefox):
         driver_firefox.get(TestUrl.HOMEPAGE_URL)
         redirect_page = Redirect(driver_firefox)
         redirect_page.click_logo_yandex()
-        assert driver_firefox.find_element(*RedirectPageLocators.NEWS).text == "Новости"
+        assert redirect_page.check_redirect_logo_yandex() == "Новости"

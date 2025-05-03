@@ -15,6 +15,15 @@ class Redirect(BasePage):
     @allure.step('Клик на лого Яндекс')
     def click_logo_yandex(self):
         self.click_to_element(RedirectPageLocators.LOGO_YANDEX)
-        windows = self.driver.window_handles
-        self.driver.switch_to.window(windows[1])
-        WebDriverWait(self.driver, 10).until(expected_conditions.element_to_be_clickable(RedirectPageLocators.NEWS))
+        self.switch_window()
+        self.find_element_with_wait(RedirectPageLocators.NEWS)
+
+    @allure.step('Проверка редиректа - лого Самокат')
+    def check_redirect_logo_samokat(self):
+        text = self.get_text_from_element(RedirectPageLocators.LOCATOR_FOR_TEST_REDIRECT_LOGO_SAMOKAT)
+        return text
+
+    @allure.step('Проверка редиректа - лого Яндекс')
+    def check_redirect_logo_yandex(self):
+        text = self.get_text_from_element(RedirectPageLocators.NEWS)
+        return text
